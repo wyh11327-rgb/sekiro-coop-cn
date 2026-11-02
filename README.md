@@ -10,11 +10,10 @@ Co-op mod for **Sekiro: Shadows Die Twice**. Kinda like the Elden Ring Seamless 
 
 ## 中文一键安装版 / Chinese one-click build
 
-本源码目录已加入定制的 `sekiro-coop-cn-mod` 发布文件：
+本仓库就是定制的 `sekiro-coop-cn-mod` 发布包：
 
-- Windows 一键安装：[`dist/sekiro-coop-cn-mod/一键安装.exe`](dist/sekiro-coop-cn-mod/一键安装.exe)
-- 完整发布包：[`dist/sekiro-coop-cn-mod.zip`](dist/sekiro-coop-cn-mod.zip)
-- 定制源码包：[`dist/sekiro-coop-cn-mod-source.zip`](dist/sekiro-coop-cn-mod-source.zip)
+- Windows 一键安装：[`一键安装.exe`](一键安装.exe)
+- 完整发布包：[`sekiro-coop-cn-mod-v1.0.8-beta.zip`](https://github.com/wyh11327-rgb/sekiro-coop-cn/releases)
 
 该版本基于上游 `1.0.8-beta`，保留中文联机设置、`Insert` 快捷面板、
 纸人不消耗以及本地门/傀儡/技能栏修复。Windows 用户直接运行
@@ -191,6 +190,6 @@ Crypto works too:
 
 ## License
 
-My code is MIT, see [LICENSE](LICENSE). `vendor/sekiro` keeps its own license (MIT NON-AI OR Apache NON-AI, files in that folder), which among other things means that code can't be used in AI training datasets.
+My code is MIT, see [LICENSE.txt](LICENSE.txt). `vendor/sekiro` keeps its own license (MIT NON-AI OR Apache NON-AI, see `licenses/`), which among other things means that code can't be used in AI training datasets.
 
 Unofficial fan mod. Not affiliated with FromSoftware, Activision or Valve, and not affiliated with LukeYui or her Seamless Co-op mods. It doesn't touch the official online mode. Use at your own risk and back up your saves.
