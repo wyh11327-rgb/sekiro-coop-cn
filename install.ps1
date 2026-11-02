@@ -1,6 +1,6 @@
-﻿<#
+<#
 .SYNOPSIS
-  One-click Windows installer for Sekiro Seamless Co-op with unlimited Spirit Emblems.
+  One-click Windows installer for Sekiro Co-op CN Mod with unlimited Spirit Emblems.
 
 .DESCRIPTION
   - Finds Sekiro (Steam registry + libraryfolders.vdf) unless -GameDir is given.
@@ -8,12 +8,12 @@
   - Installs me3 to %LOCALAPPDATA%\Programs\garyttierney\me3 if it is missing.
   - Installs the mod outside the game folder (%LOCALAPPDATA%\SekiroCoop by default).
   - Writes sekiro_coop_settings.ini with the password and unlimited_spirit_emblems = 1.
-  - Creates a "Sekiro Co-op" desktop shortcut that starts the game through me3.
+  - Creates a "Sekiro Co-op CN Mod" desktop shortcut that starts the game through me3.
 
 .EXAMPLE
-  .\一键安装.exe
-  .\一键安装.exe -Password "our-secret" -PlayerName "Wolf"
-  .\一键安装.exe -CheckOnly -GameDir "D:\SteamLibrary\steamapps\common\Sekiro"
+  .\install.exe
+  .\install.exe -Password "our-secret" -PlayerName "Wolf"
+  .\install.exe -CheckOnly -GameDir "D:\SteamLibrary\steamapps\common\Sekiro"
 #>
 [CmdletBinding()]
 param(
@@ -65,7 +65,7 @@ function Write-Warn([string]$Text) {
 }
 
 function Throw-Help([string]$Text) {
-    throw "$Text`nSee the install section in README.md, or run: 一键安装.exe -Help"
+    throw "$Text`nSee the install section in README.md, or run: install.exe -Help"
 }
 
 function Find-SekiroDir([string]$Explicit) {
@@ -202,7 +202,7 @@ function Find-Me3([switch]$NoDownload) {
     }
 
     Write-Step 'me3 is missing; downloading the latest Windows build from GitHub'
-    $api = Invoke-RestMethod -Uri $script:Me3Api -Headers @{ 'User-Agent' = 'sekiro-coop-one-click-installer' }
+    $api = Invoke-RestMethod -Uri $script:Me3Api -Headers @{ 'User-Agent' = 'sekiro-coop-cn-mod-installer' }
     $asset = $api.assets | Where-Object { $_.name -eq $script:Me3Asset } | Select-Object -First 1
     if (-not $asset) {
         $asset = $api.assets | Where-Object { $_.name -like '*windows*' -and $_.name -like '*.zip' } | Select-Object -First 1
@@ -278,7 +278,7 @@ function Write-Settings([string]$Path, [string]$PasswordValue, [string]$NameValu
         $text = $text.Replace('@TRANSPORT@', 'auto').Replace('@HOST@', '')
     } else {
         $text = @"
-; Sekiro seamless co-op settings (written by the one-click installer).
+; Sekiro Co-op CN Mod settings (written by the one-click installer).
 password = $PasswordValue
 player_name = $NameValue
 
@@ -296,7 +296,7 @@ function New-Shortcut([string]$ShortcutPath, [string]$Me3Path, [string]$ProfileP
     $shortcut.TargetPath = $Me3Path
     $shortcut.Arguments = 'launch --game sekiro --profile "' + $ProfilePath + '"'
     $shortcut.WorkingDirectory = $WorkDir
-    $shortcut.Description = 'Sekiro Seamless Co-op'
+    $shortcut.Description = 'Sekiro Co-op CN Mod'
     if (Test-Path -LiteralPath $GameExe) {
         $shortcut.IconLocation = $GameExe + ',0'
     }
@@ -335,10 +335,10 @@ if (-not $dll) {
         Throw-Help @'
 sekiro_coop.dll was not found and could not be built.
 
-Put a prebuilt sekiro_coop.dll next to 一键安装.exe, or install:
+Put a prebuilt sekiro_coop.dll next to install.exe, or install:
   - Rust stable: https://rustup.rs
   - Visual Studio 2022 Build Tools with "Desktop development with C++"
-Then run 一键安装.exe again. build-dist.cmd also expects
+Then run install.exe again. build-dist.cmd also expects
 "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools".
 '@
     }
@@ -437,7 +437,7 @@ Write-Ok $InstallDir
 Write-Ok 'sekiro_coop_settings.ini: unlimited_spirit_emblems = 1'
 
 # Launcher fallback for people who do not use the shortcut.
-$launcherPath = Join-Path $InstallDir 'Play Sekiro Co-op.cmd'
+$launcherPath = Join-Path $InstallDir 'Play Sekiro Co-op CN Mod.cmd'
 if ($me3) {
     $launcher = @"
 @echo off
@@ -460,7 +460,7 @@ if (-not $NoShortcut -and $me3) {
     Write-Step 'Creating the desktop shortcut'
     try {
         $desktop = [Environment]::GetFolderPath('Desktop')
-        $shortcutPath = Join-Path $desktop 'Sekiro Co-op.lnk'
+        $shortcutPath = Join-Path $desktop 'Sekiro Co-op CN Mod.lnk'
         New-Shortcut $shortcutPath $me3 $profilePath $gameExe $InstallDir
         Write-Ok $shortcutPath
     } catch {
@@ -481,7 +481,7 @@ Write-Host "  Settings: $iniPath"
 Write-Host "  Password: $(if ($Password) { 'set' } else { 'NOT SET (co-op stays off until you set it)' })"
 Write-Host '  Spirit Emblems: unlimited (set unlimited_spirit_emblems = 0 to restore normal use)'
 if (-not $NoShortcut -and $me3) {
-    Write-Host '  Start:    desktop shortcut "Sekiro Co-op"'
+    Write-Host '  Start:    desktop shortcut "Sekiro Co-op CN Mod"'
 }
 Write-Host '  Reminder: everyone needs the same password and the same mod version.'
 

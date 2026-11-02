@@ -1,0 +1,88 @@
+SEKIRO CO-OP CN MOD 1.0.8 beta - quick guide
+=============================================
+
+Beta, still buggy. Back up your saves before playing.
+Full readme, known bugs and source: https://github.com/Tihvert/sekiro-coop
+
+CUSTOM 1.0.8 BUILD
+- Based on the 1.0.8 beta source.
+- Keeps the Chinese in-game Co-op Settings / Mod settings pages.
+- Keeps the Insert quick connection panel (UDP / SakuraFrp).
+- Keeps unlimited Spirit Emblems (`unlimited_spirit_emblems = 1`).
+- Windows one-click: run 一键安装.exe. Manual users must keep
+  sekiro_coop.dll and the libstdc++ / libgcc / libwinpthread DLLs together.
+
+YOU NEED
+- Sekiro on Steam, version 1.06 (normal, unmodded)
+- me3 mod loader: https://github.com/garyttierney/me3/releases (default install)
+- Windows, or Linux / Steam Deck with Proton (see LINUX / STEAM DECK below)
+
+ONCE
+1. Install me3.
+2. Got Sekiro Online or other online mods? Delete dinput8.dll, steam_api64.org,
+   cream_api.ini and SekiroOnlineFont.ttf from the game folder, then
+   Steam > Sekiro > Properties > Installed Files > Verify integrity.
+3. Unzip this anywhere EXCEPT the game folder.
+4. Start Steam, double-click sekiro-coop.me3 once (me3 starts the game),
+   close the game.
+   sekiro_coop_settings.ini shows up next to the DLL. If it does not, check
+   me3 is installed and your antivirus did not remove sekiro_coop.dll.
+5. Put the same password for everyone in the ini (password = ...), or leave it
+   empty and use the in-game Insert panel for a direct UDP connection.
+6. Everyone needs the exact same mod version.
+
+PLAYING
+1. Start Steam, double-click sekiro-coop.me3, load your save.
+2. After the intro (Genichiro beats you, you wake up at Dilapidated Temple)
+   rest at the temple idol. You get:
+   - Kindred Bell   = open your world (host)
+   - Kindred Charm  = join the host
+   - Severed Thread = leave co-op
+3. Host uses the Bell, others use the Charm. Status is in the top left corner.
+4. Settings: the ini file or Options > Co-op Settings in game.
+
+STOPPING
+1. Everyone uses the Severed Thread, joiners first and host last.
+   Joiners get a loading screen and are back in their own world.
+2. Then Quit Game from the menu, or Alt+F4.
+Quit Game is greyed out while you're still in co-op, that's on purpose.
+Don't close the game from Task Manager unless it's frozen. Then the log
+can't tell me if it crashed or not. If it froze or crashed, say so in your
+report and send log.txt and log.old.txt.
+
+CONNECTION
+Steam by default, falls back to direct UDP after 15 s. Steam lobbies only work
+when Sekiro is owned on that Steam account and Steam is online; otherwise use UDP.
+For UDP the host needs port 28100 UDP open (UPnP is tried). Host address is in
+udp_join_code.txt, joiners put it in udp_host_address and set transport = udp.
+Can't open ports? A virtual LAN (Radmin VPN, ZeroTier) works: use the host's
+VPN IP as udp_host_address.
+
+SAVES
+Co-op uses its own save S0000.coop.sl2, your normal save isn't touched.
+Backups: %LOCALAPPDATA%\sekiro-coop\save-backups\
+
+BUGS
+Log: %LOCALAPPDATA%\sekiro-coop\log.txt
+Press F11 (or Back/Share on a pad) when a bug happens, it marks the log.
+Report on GitHub with the logs from everyone.
+
+LINUX / STEAM DECK
+Not tested on Linux by me yet. me3 supports Linux and the Deck through
+Proton, so it should work. Tell me if it does or doesn't.
+No WINEDLLOVERRIDES launch option needed, that's only for Sekiro Online.
+1. Start Sekiro once from Steam normally, quit at the main menu.
+2. Install me3 in a terminal (Deck: Desktop Mode, Konsole):
+   curl --proto '=https' --tlsv1.2 -sSfL https://github.com/garyttierney/me3/releases/latest/download/installer.sh | sh
+   "me3 is not available on PATH" is fine, play.sh finds it.
+3. Unzip this in your home folder (not the game folder), e.g. ~/Games/sekiro-coop-cn-mod
+4. Steam running, then in that folder: sh play.sh
+   Starting from the Steam library button starts the game WITHOUT the mod.
+5. Rest is the same as above (ini, password, items).
+Files: the ini is next to the DLL. Log, backups and saves are in
+Sekiro's Proton prefix:
+  ~/.local/share/Steam/steamapps/compatdata/814380/pfx/drive_c/users/steamuser/
+    AppData/Local/sekiro-coop/   log.txt, save-backups
+    AppData/Roaming/Sekiro/      saves
+Full Linux guide, Deck Game Mode and fixes for "doesn't start":
+https://github.com/Tihvert/sekiro-coop/blob/main/docs/LINUX.md

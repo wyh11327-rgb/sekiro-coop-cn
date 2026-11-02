@@ -1,7 +1,7 @@
-Sekiro 无缝联机（sekiro-coop）+ 纸人不消耗 一键安装
-====================================================
+Sekiro Co-op CN Mod（1.0.8 beta 定制整合）+ 纸人不消耗
+======================================================
 
-先解压整个压缩包，再双击 一键安装.exe。
+先解压整个压缩包，再双击“一键安装.exe”。
 
 界面说明
 --------
@@ -13,12 +13,16 @@ Sekiro 无缝联机（sekiro-coop）+ 纸人不消耗 一键安装
    - 复制联机 DLL 到 %LOCALAPPDATA%\SekiroCoop（不会写进游戏目录）
    - 释放内置的 me3 和纸人补丁启动器
    - 写入 sekiro_coop_settings.ini
-   - 在桌面创建 “Sekiro Co-op” 快捷方式
+   - 在桌面创建 “Sekiro Co-op CN Mod” 快捷方式
 5. 点“卸载并恢复”可以删除模组和快捷方式；游戏本体、联机存档和备份都会保留。
 
-安装器已经内置联机 DLL、me3 和默认配置，不需要 Rust 或 Visual Studio。
-游戏内的“联机设置”页面和“模组设置”面板已经全部汉化。
-如果 一键安装.exe 旁边放了自己的 sekiro_coop.dll，会优先使用它
+安装器已经内置 1.0.8 beta 定制 DLL、me3 和默认配置，不需要 Rust 或
+Visual Studio。定制 DLL 保留：
+  - 游戏内“联机设置”页面和“模组设置”面板中文界面
+  - Insert 快捷联机面板（UDP / SakuraFrp）
+  - 纸人不消耗（unlimited_spirit_emblems）
+  - 原有的技能栏、门和傀儡相关修复
+如果“一键安装.exe”旁边放了自己的 sekiro_coop.dll，会优先使用它
 （例如本仓库新增了内置纸人功能后编译出来的 DLL）。
 
 纸人不消耗
@@ -26,7 +30,7 @@ Sekiro 无缝联机（sekiro-coop）+ 纸人不消耗 一键安装
 默认开启，设置文件里是：
   unlimited_spirit_emblems = 1
 
-内置的是本仓库编译的联机 DLL（已含中文设置和纸人不消耗）。
+内置的是以 1.0.8 beta 源码为基线、重新合入定制功能后编译的联机 DLL。
 启动器 SekiroCoopLauncher.exe 仍会在游戏运行时保底写入游戏自带的
 PlayerNoEmblemsConsume 调试开关，所以即使换成不含该功能的上游 DLL，
 纸人不消耗也能生效。两种方式都不会修改存档。
