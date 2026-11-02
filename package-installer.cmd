@@ -9,7 +9,11 @@ set "PKG=%OUT%\sekiro-coop-one-click"
 if exist "%PKG%" rmdir /s /q "%PKG%"
 mkdir "%PKG%" || exit /b 1
 
-copy /y "%~dp0install.exe" "%PKG%\install.exe" >nul || exit /b 1
+rem The installer exe has a Chinese name; copy it from Unicode code points so this
+rem batch file stays pure ASCII.
+set "SRCDIR=%~dp0"
+set "PKGDEST=%PKG%"
+powershell -NoProfile -Command "$n = -join ([char]0x4E00,[char]0x952E,[char]0x5B89,[char]0x88C5) + '.exe'; Copy-Item -LiteralPath ($env:SRCDIR + $n) -Destination $env:PKGDEST -Force" || exit /b 1
 copy /y "%~dp0README-INSTALL.txt" "%PKG%\README-INSTALL.txt" >nul || exit /b 1
 copy /y "%~dp0ship-public\HOW-TO-PLAY.txt" "%PKG%\HOW-TO-PLAY.txt" >nul || exit /b 1
 copy /y "%~dp0ship-public\LICENSE.txt" "%PKG%\LICENSE.txt" >nul || exit /b 1

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   One-click Windows installer for Sekiro Seamless Co-op with unlimited Spirit Emblems.
 
@@ -11,9 +11,9 @@
   - Creates a "Sekiro Co-op" desktop shortcut that starts the game through me3.
 
 .EXAMPLE
-  .\install.exe
-  .\install.exe -Password "our-secret" -PlayerName "Wolf"
-  .\install.exe -CheckOnly -GameDir "D:\SteamLibrary\steamapps\common\Sekiro"
+  .\一键安装.exe
+  .\一键安装.exe -Password "our-secret" -PlayerName "Wolf"
+  .\一键安装.exe -CheckOnly -GameDir "D:\SteamLibrary\steamapps\common\Sekiro"
 #>
 [CmdletBinding()]
 param(
@@ -65,7 +65,7 @@ function Write-Warn([string]$Text) {
 }
 
 function Throw-Help([string]$Text) {
-    throw "$Text`nSee the install section in README.md, or run: install.exe -Help"
+    throw "$Text`nSee the install section in README.md, or run: 一键安装.exe -Help"
 }
 
 function Find-SekiroDir([string]$Explicit) {
@@ -335,10 +335,10 @@ if (-not $dll) {
         Throw-Help @'
 sekiro_coop.dll was not found and could not be built.
 
-Put a prebuilt sekiro_coop.dll next to install.exe, or install:
+Put a prebuilt sekiro_coop.dll next to 一键安装.exe, or install:
   - Rust stable: https://rustup.rs
   - Visual Studio 2022 Build Tools with "Desktop development with C++"
-Then run install.exe again. build-dist.cmd also expects
+Then run 一键安装.exe again. build-dist.cmd also expects
 "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools".
 '@
     }

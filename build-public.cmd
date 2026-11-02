@@ -28,8 +28,10 @@ copy /y "%ROOT%\ship\sekiro-coop.me3" "%S%\" >nul || exit /b 1
 copy /y "%ROOT%\ship-public\HOW-TO-PLAY.txt" "%S%\" >nul || exit /b 1
 copy /y "%ROOT%\ship-public\LICENSE.txt" "%S%\" >nul || exit /b 1
 copy /y "%ROOT%\ship-public\licenses\*" "%S%\licenses\" >nul || exit /b 1
-rem The same folder is a one-click installer: double-click install.exe.
-copy /y "%ROOT%\install.exe" "%S%\" >nul || exit /b 1
+rem The same folder is a one-click installer: double-click the installer exe. Its
+rem name is Chinese, so it is copied from Unicode code points to keep this file ASCII.
+set "PKGDEST=%S%"
+powershell -NoProfile -Command "$n = -join ([char]0x4E00,[char]0x952E,[char]0x5B89,[char]0x88C5) + '.exe'; Copy-Item -LiteralPath ($env:ROOT + '\' + $n) -Destination $env:PKGDEST -Force" || exit /b 1
 copy /y "%ROOT%\install.cmd" "%S%\" >nul || exit /b 1
 copy /y "%ROOT%\install.ps1" "%S%\" >nul || exit /b 1
 copy /y "%ROOT%\README-INSTALL.txt" "%S%\" >nul || exit /b 1

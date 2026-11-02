@@ -6,7 +6,7 @@ Seamless co-op mod for **Sekiro: Shadows Die Twice**. Kinda like the Elden Ring 
 
 ![two players at the Fountainhead Palace overlook](media/overlook.jpg)
 
-**Download:** [Nexus Mods](https://www.nexusmods.com/sekiro/mods/2944) or [GitHub Releases](https://github.com/Tihvert/sekiro-coop/releases).
+**Download:** [GitHub Releases](https://github.com/wyh11327-rgb/sekiro-coop-cn/releases) or [Nexus Mods](https://www.nexusmods.com/sekiro/mods/2944).
 
 ## Heads up, read this first
 
@@ -56,7 +56,7 @@ Also, full honesty: this was made with a LOT of help from AI (mostly Claude). I 
 
 ### One-click installer (Windows)
 
-Double-click **`install.exe`**. It is a self-contained GUI installer: it embeds
+Double-click **`一键安装.exe`**. It is a self-contained GUI installer: it embeds
 the co-op DLL built from this source (Chinese in-game settings and the
 paper-doll/Spirit Emblem feature), me3 and the launcher, so no Rust or Visual
 Studio is needed on the player's PC. It:
@@ -69,12 +69,12 @@ Studio is needed on the player's PC. It:
    **Sekiro Co-op** desktop shortcut.
 6. Has "安装 / 更新" and "卸载并恢复" buttons plus a live log window.
 
-If a `sekiro_coop.dll` is next to `install.exe`, the installer prefers it; this
+If a `sekiro_coop.dll` is next to `一键安装.exe`, the installer prefers it; this
 is where a new build from this source tree would go. The embedded DLL already
 contains the Chinese settings and the no-consume code; the launcher also applies
 the game's `PlayerNoEmblemsConsume` debug byte at runtime as a fallback.
 
-The public release zip from `build-public.cmd` already includes `install.exe`.
+The public release zip from `build-public.cmd` already includes `一键安装.exe`.
 To make a minimal installer package for friends:
 
 ```bat
@@ -92,7 +92,7 @@ You need:
 
 - Sekiro on **Steam, version 1.06** (the last patch, normal unmodded exe)
 - [me3 mod loader](https://github.com/garyttierney/me3/releases) (Windows installer, default options are fine)
-- Windows
+- Windows, or Linux / Steam Deck with Proton (see `docs/LINUX.md`)
 
 Steps:
 
@@ -188,7 +188,8 @@ Crypto works too:
 
 ## Changelog
 
-- **Unreleased**: single-file GUI installer (`install.exe`: Steam library dropdown, install/update, uninstall, log) with the co-op DLL, me3 and the no-consume launcher embedded; Chinese in-game settings (native Co-op Settings page + Mod settings panel); HKMP-style in-game connection panel on Insert for SakuraFrp/UDP; unlimited Spirit Emblems (`unlimited_spirit_emblems = 1`, on by default)
+- **Unreleased**: single-file GUI installer (`一键安装.exe`: Steam library dropdown, install/update, uninstall, log) with the co-op DLL, me3 and the no-consume launcher embedded; Chinese in-game settings (native Co-op Settings page + Mod settings panel); HKMP-style in-game connection panel on Insert for SakuraFrp/UDP; unlimited Spirit Emblems (`unlimited_spirit_emblems = 1`, on by default)
+- **1.0.8 beta** (2026-11-02): public build shipped as **Sekiro Together**; Linux / Steam Deck support (Proton) with a `play.sh` launcher and a Linux section in HOW-TO-PLAY (see `docs/LINUX.md`); a "Stopping" section that says to use the Severed Thread before quitting; the one-click installer is named `一键安装.exe`. `prebuilt/sekiro_coop.dll` and the installer embed this 1.0.8-beta build
 - **1.0.5 beta** (2026-10-31): if the host and a friend had a different Kuro's Charm state, enemies had different HP on each screen (up to 1.8x). Now everyone uses the host's state during the session and you get your own back when you leave. Not tested in game yet, so tell me if it acts weird
 - **1.0.4 beta** (2026-10-30): the Bell, Charm and Thread did nothing on non-English games because the mod looked the item up by its English name. Fixed, a player confirmed it works on a Chinese game and that Steam joining works too.
 - **1.0.3 beta** (2026-10-30): if Steam won't make a lobby (you need Sekiro owned on that account and Steam online) the status text tells you now, and a joiner that can't find a host gets told to use the host's join code in udp_host_address. Also a VPN tip (Radmin, ZeroTier) in HOW-TO-PLAY.
